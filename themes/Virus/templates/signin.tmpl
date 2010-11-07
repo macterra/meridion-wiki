@@ -1,0 +1,56 @@
+<?php // -*-html-*- ?>
+<!-- $Id: signin.tmpl,v 1.15 2002/02/14 03:29:55 carstenklapp Exp $ -->
+<?php
+
+     $Sep = $Theme->getButtonSeparator();
+     $SignOutB = $Theme->makeButton(_("Sign Out"), "javascript:SignOut();", 'wikiaction');
+
+     if (empty($FORMNAME))
+         $FORMNAME = 'signin';
+     else
+         $NOFORM = true;
+?>
+
+<?php if (empty($NOFORM)) { ?>
+  <form method="post" action="<?=BASE_URL?>" accept-charset="<?=CHARSET?>" name="<?=$FORMNAME?>">
+  <?= HiddenInputs($request->getArgs()) ?>
+<?php } ?>
+
+<?php if ($user->isSignedIn()) {  ?>
+
+  <?= fmt("You are signed in as %s", WikiLink($user->getId(), 'auto')) ?>
+  <?=$Sep?>
+  <script language="JavaScript" type="text/javascript"><!--
+    document.write('<input type="hidden" name="auth[logout]" value="0" />');
+    function SignOut() { 
+      document.forms["<?=$FORMNAME?>"].elements["auth[logout]"].value = 1;
+      document.forms["<?=$FORMNAME?>"].submit();
+    }
+    document.write('<?=$SignOutB?>'); // -->
+  </script>
+  <noscript>
+    <?= Button("submit:auth[logout]", _("Sign Out"), 'wikiaction') ?>
+  </noscript>
+
+<?php } else { ?>
+
+  <?php $SignInInput = HTML::input(array('type' => 'text',
+                                         'name' => "auth[userid]",
+                                         'size' => 12,
+                                         'maxlength' => 256,
+                                         'onchange' => "this.form.submit();"));
+        $SignInInput->addTooltip(_("Enter your UserId to sign in")) ?>
+
+  <script language="JavaScript" type="text/javascript"><!--
+    document.write("<small><?=_("Sign In")?></small> ");
+  // --></script>
+  <?= $SignInInput ?>
+  <noscript>
+    <?=Button("submit:auth[login]", _("Sign In"), 'wikiaction')?>
+  </noscript>
+
+<?php } ?>
+
+<?php if (empty($NOFORM)) { ?>
+  </form>
+<?php } ?>

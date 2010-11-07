@@ -1,0 +1,17 @@
+<?php // -*-html-*- ?>
+<!-- $Id: body.tmpl,v 1.11 2002/02/16 06:03:08 carstenklapp Exp $ -->
+<body>
+<!-- Page title and logo -->
+<h1><a class="wikilink" 
+       href="<?=WikiURL(HomePage)?>"
+       ><img src="<?=$Theme->getImageURL('logo')?>"
+             border="0" alt="<?=WIKI_NAME?>: <?=HomePage?>" 
+             align="bottom" /></a> <?=$HEADER?></h1>
+<?= $CONTENT ?>
+<?= Template('navbar') ?>
+<!-- RELATEDPAGES were here. -->
+
+<?= $GLOBALS['ErrorManager']->getPostponedErrorsAsHTML() ?>
+
+<?php if (defined('DEBUG')) { ?><?= Template('debug') ?><?php } ?>
+</body>

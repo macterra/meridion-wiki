@@ -1,0 +1,174 @@
+/**
+ * $Id: SpaceWiki-gravimetric.css,v 1.1 2002/02/22 23:46:56 carstenklapp Exp $
+ *
+ * SpaceWiki-gravimetric.css
+ *
+ * This is stuff which should be in SpaceWiki.css, but which breaks NS4.
+ */
+
+/**
+ * General
+ */
+input.numeric { text-align: right; }
+input {
+  margin: 0.1em;
+  border: 2px solid #0053db;
+  text-align:  center;
+}
+
+
+/**
+ * Wiki Forms
+ * 
+ * The div inside the wikiadmin upload form does not
+ * have a class yet, so it must be referenced indirectly
+ */
+/* div.wikiaction, div.wikiadmin { */
+div.wikiaction, form.wikiadmin div {
+  /* Emulate the display behaviour of a table, to shrink it's width.
+   * ie5.1Mac ignores this */
+  position: relative;
+  display: table;
+}
+
+/* Add space between the input field and following buttons, but not after the last button. */
+div.wikiaction input[type=text], div.wikiadmin input[type=text], form.wikiadmin input[type=file] { margin-right: 0.5em; }
+
+
+/**
+ * Links
+ */
+
+/* Make wikiaction links look futuristic */ 
+a.wikiaction {
+  border-left:   1.5em solid #115511;
+  border-right:  0.15em solid #115511;
+  padding-left:  0.15em;
+  padding-right: 0.3em;
+}
+a.wikiaction:hover {
+  border-right: 0.15em solid #1bab11;
+}
+
+a.wikiadmin {
+  border-left:   1.5em solid #982505;
+  border-right:  0.15em solid #982505;
+  padding-left:  0.15em;
+  padding-right: 0.3em;
+}
+a.wikiadmin:hover {
+  border-right: .15em solid #ef0032;
+}
+
+/* QuestionMark */
+.wikiunknown a, .named-wikiunknown a {
+  border: 1px solid black;
+  padding-left:  1px;
+  padding-right: 1px;
+  padding-top: 1px;
+  margin-right: 1px;
+  font-size: smaller; /* too small in NS4 */
+}
+.wikiunknown a:hover, .named-wikiunknown a:hover {
+  border: 1px solid #403752;
+}
+
+
+/* Link icons */
+img.linkicon { vertical-align: middle; }
+
+
+/**
+ * Headings
+ */
+h1 {
+  padding-top:      0.25ex;
+  padding-left:     0.5em;
+  padding-right:    0.25em;
+  padding-bottom:   1px;
+}
+div.toolbar h1 a.wiki, h1 a.backlinks {
+  padding-top:      0.25ex;
+  padding-left:     0.25em;
+  padding-right:    0.25em;
+  padding-bottom:   1px;
+}
+h2 a.wiki {
+  padding-top:      0.25ex;
+  padding-left:     0.25em;
+  padding-right:    0.25em;
+  padding-bottom:   1px;
+}
+
+div.toolbar input {
+  border:  1px solid #0053db;
+  padding: 1px;
+  text-align:  left;
+}
+
+
+/**
+ * Edit Page & View Source
+ */
+/* color: inherit; and background: inherit; display as lime in NS4 */
+div.transclusion { font-size: smaller; } /* too small in NS4 */
+
+
+/**
+ * Diff Output
+ */
+.diff .block div {
+  position: relative;
+  padding-left: 1.5em;
+} 
+.diff .prefix {
+  position: absolute;
+  left: 0;
+  top:  0;
+}
+
+
+.editdate {
+  padding-top:    0.25ex;
+  padding-left:   0.5em;
+  padding-right:  0.5em;
+  padding-bottom: 1px;
+  margin-top:     2em;
+  margin-bottom:  0ex;
+}
+
+div.toolbar .wiki {
+  border-left:   1.5em solid #0053db;
+  border-right:  0.15em solid #0053db;
+  padding-left:  0.15em;
+  padding-right: 0.3em;
+}
+div.toolbar .wiki:hover {
+  border-right: 0.15em solid #5791ff;
+}
+
+b.wikisummary {
+  padding: 2px;
+  margin: 1px;
+}
+
+/**
+ * Other
+ */
+/* PHP Warnings */
+div.errors {
+  font-size: smaller; /* too small in NS4 */
+  margin-top:    4ex;
+  margin-bottom: 2ex;
+  padding: 0.5ex 0.25em;
+}
+.errors h4 {
+  margin: 0;
+  padding: 0.5ex 0.25em;
+}
+
+.error {
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+}
+

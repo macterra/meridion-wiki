@@ -1,0 +1,363 @@
+/*
+  $Id: MacOSX.css,v 1.25 2002/02/19 21:36:19 carstenklapp Exp $
+
+  Classes:
+
+  div.wikitext - the transformed wiki page text.
+
+  a.wiki             - link to page in wiki.
+  a.named-wiki       - a named link to page in wiki (from e.g. [name|WikiPage]).
+  a.interwiki        - link to page in another wiki
+    span.wikipage    - page name within interwiki link.
+  a.named-interwiki  - link to page in another wiki
+  a.url              - link to external URL from wiki page.
+  a.named-url        - link to external URL from wiki page.
+
+  .wikiunknown a, .wikiunknown u
+  .named-wikiunknown a, .named-wikiunknown u
+  
+  a.wikiaction
+  a.wikiadmin
+  .wikiunsafe
+
+  a.backlinks
+  
+TODO: Get rid of tables in wikiaction forms.
+*/
+
+/* NS4 doesn't grok @import.  This allows us to put things which
+ * break NS4 in another file. As of OmniWeb 4.1, OW now @imports :-(
+ */
+@import url(MacOSX-heavy.css);
+
+body { background: #fafafa url("image/bgpaper8.png"); }
+body.edit { background: #fafafa url("images/bggranular.png"); }
+
+body { }
+
+/*
+ * NS4, defaults from body don't always propagate correctly.
+ * So we need this:
+ */ 
+h1, h2, h3, .toolbar, td { font-family: "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+input.button { font-family: "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+input.numeric {
+  text-align: right;
+}
+
+.wikitext pre { font-family: Monaco, monospace; }
+
+
+/**
+ * Wiki
+ */
+div.wikitext {
+  background: white;
+  /* for NS4 */
+  border: 1px solid black;
+
+  border-top:    1px solid #7c7c7c;
+  border-left:   1px solid #c3c3c3;
+  border-bottom: 1px solid #dddddd;
+  border-right:  1px solid #c3c3c3;
+  padding-left: 0.8em; 
+  padding-right: 0.8em; 
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  margin: 0.5ex 0px;
+ /* This breaks Netscape 4: (display does not go full width).
+    width: auto;
+ */
+ clear: both;
+}
+
+input.wikitext { margin:0px; }
+
+div.toolbar { margin: 1ex 0ex; }
+
+
+/**
+ * PageTypes
+ */
+.interwiki-map thead td {
+  background: #e8e8e8;
+  font-weight: bold;
+  font-size: smaller;
+}
+.interwiki-map thead td:first-child { text-decoration: underline; }
+.interwiki-moniker { background: #eee; }
+.interwiki-url { background: #f8f8f8; }
+
+ 
+div.errors {
+ background: #eee;
+ border: medium;
+ border-color: red;
+ border-style: solid;
+ padding-left: 0.8em; 
+ padding-right: 0.8em; 
+ padding-top: 0px;
+ padding-bottom: 0px;
+ margin: 1em;
+ /* This breaks Netscape 4: (display does not go full width).
+    width: auto;
+ */
+ clear: both;
+}
+
+.errors h4 {
+ color:red;
+ text-decoration: underline;
+ margin:0px;
+}
+
+p.error {
+ font-size: smaller;
+ font-family: Monaco, monospace;
+ margin:0px;
+}
+.error ul
+{
+ font-size: smaller;
+ font-family: Monaco, monospace;
+}
+
+/*
+ * Style for <hr>s in wiki markup.
+ */
+.wikitext hr {}
+
+
+/*
+ * Link styles
+ */
+/* Wiki Links */
+a.wiki { text-decoration: none; }
+.wiki, .named-wiki  { font-weight: bold; color:#1d42be; } /*blue*/
+/* This is obscene in NS4
+b .wiki, STRONG .wiki { font-size: larger; }
+*/
+
+/* Unknown links */
+.wikiunknown a, .named-wikiunknown a, .wikiunknown U
+{ text-decoration: none; }
+
+.wikiunknown, .named-wikiunknown
+{color: #555; }
+
+/* Interwiki links */
+a.interwiki { text-decoration: none; }
+.wikipage   { font-weight: bold; }
+
+.interwiki,
+i .interwiki .wikipage, em .interwiki .wikipage
+{ font-style: oblique; }
+
+.interwiki .wikipage,
+i .interwiki, em .interwiki  
+{ font-style: normal; }
+
+/*
+ * wikiaction, wikiadmin, wikiunsafe:
+ */
+a.wikiaction, a.wikiadmin       { text-decoration: none; }
+
+/*
+ * No border on external link icons.
+ */
+img.linkicon, img.rssicon	{ border: 0px; }
+img.rssicon		{ vertical-align: middle; }
+/* This screws up NS4, moved to phpwiki-heavy.css 
+img.linkicon		{ vertical-align: middle; }
+*/
+img.wiki-button		{ vertical-align: middle; }
+
+.wikiaction { border: 0; }
+ 
+/* backlinks */
+a.backlinks { color: #006; }
+
+/* Make the textarea on the edit page full width */
+textarea.wikiedit { width: 100%; margin-top: 1ex; }
+
+p.editdate { font-size: smaller; margin-bottom: -1ex; font-family: "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+/* Calendar plugin */
+a.cal-hide,
+ a.cal-arrow { text-decoration: none; }
+.cal-arrow   { font-weight: bold; }
+.cal-dayname { font-size: smaller;
+               text-decoration: none; }
+table.cal   {
+  /* for NS4 */
+  border: 1px solid black;
+
+  border-top:    1px solid #7c7c7c;
+  border-left:   1px solid #c3c3c3;
+  border-bottom: 1px solid #dddddd;
+  border-right:  1px solid #c3c3c3;
+  background: #bebebe;
+} 
+table.cal td {
+  background: white;
+  /* for NS4 */
+  border: 1px solid black;
+
+  border-top:    1px solid #7c7c7c;
+  border-left:   1px solid #c3c3c3;
+  border-bottom: 1px solid #dddddd;
+  border-right:  1px solid #c3c3c3;
+}
+table.cal-header td {
+  font-size:  larger;
+  background: white;
+  border: 0px; }
+table.cal td.cal-dayname { background: #f4f4f4; }
+table.cal td.cal-today {
+  background:    #f4f4f4;
+  /* for NS4 */
+  border: 1px solid black;
+
+  border-top:    1px solid #7c7c7c;
+  border-left:   1px solid #c3c3c3;
+  border-bottom: 1px solid #dddddd;
+  border-right:  1px solid #c3c3c3;
+}
+
+/* IncludePage plugin */
+.transclusion-title {
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  /* font-style: oblique; */
+  font-size: smaller; /* 0.75em; */
+  text-decoration: underline;
+  text-align: right;
+} 
+
+div.transclusion { 
+  /* background: #fff url("images/bgpaper8.png"); */
+  /* background: white; */
+  background: #fdfdfd;
+  /* for NS4 */
+  border: 1px solid black;
+
+  border-top:    1px solid #7c7c7c;
+  border-left:   1px solid #c3c3c3;
+  border-bottom: 1px solid #dddddd;
+  border-right:  1px solid #c3c3c3;
+
+  padding-left:  0.8em; 
+  padding-right: 0.8em; 
+  padding-top:    0px;
+  padding-bottom: 0px;
+  margin: 0.5ex ;
+}
+
+/* The transclusion of the TextEditingRules Synopsis on templates/editpage.html */
+div.wiki-edithelp .transclusion {
+  font-size: smaller;
+  background: inherit;
+  padding: 0.5ex 0.5em;
+  margin: 0.2ex 5%;
+}
+div.wiki-edithelp .transclusion p {
+  margin: 0;
+}
+div.wiki-edithelp {
+  /* background: #fff url("images/bgpaper8.png"); */
+  background: white;
+  /* for NS4 */
+  border: 1px solid black;
+
+  border-top:    1px solid #7c7c7c;
+  border-left:   1px solid #c3c3c3;
+  border-bottom: 1px solid #dddddd;
+  border-right:  1px solid #c3c3c3;
+
+  font-size: smaller;
+  padding: 6pt;
+}
+div.wiki-message {
+  background: #fff url("images/bggranular.png");
+  border: solid 1px #d8d8d8;
+  padding: 6pt;
+}
+.printer { display: none; }
+
+
+/**
+ * Diff Output
+ */
+/* main box */
+.diff {
+  background: white;
+  /* for NS4 */
+  border: 1px solid black;
+
+  border-top:    1px solid #7c7c7c;
+  border-left:   1px solid #c3c3c3;
+  border-bottom: 1px solid #dddddd;
+  border-right:  1px solid #c3c3c3;
+}
+.diff .block {
+  background: #ccc;
+  /* for NS4 */
+/*  border: none;*/
+}
+
+/* individual blocks */
+.diff .context {
+  background: white;
+  /* for NS4 */
+  border: none;
+}
+/* + - line prefix */
+.diff .block tt {
+  font-weight: normal;
+  font-family: monospace;
+  margin-left: -0.6em;
+  color: black;
+  /* for NS4 */
+  border: none;
+}
+/* changed words */
+.diff del, .diff ins {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* blocks containing deleted or added words */
+.diff .original, .diff .deleted,
+.diff .final, .diff .added {
+  background: white;
+}
+/* blocks containing deleted words */
+.diff .original, .diff .deleted {
+  background: white;
+  border: 2px solid #f99; /* fcc */
+}
+/* blocks containing added words */
+.diff .final, .diff .added {
+  background: white;
+  border: 2px solid #9f9; /* cfc */
+}
+
+/* These don't work in NS4 -- it completely ignores <del> and <ins>. */
+/* deleted words */
+.diff del { background: #fcc; } /* f99 */
+/* added words */
+.diff ins { background: #cfc; } /* 9f9 */
+
+
+/* PageList output */
+.pagelist tr.evenrow { background: #eee; }
+.pagelist tr.oddrow  { background: #f7f7f7; }
+
+/* For emacs users
+ *
+ * Local Variables:
+ * mode: c
+ * c-file-style: cc-mode
+ * End:
+ */

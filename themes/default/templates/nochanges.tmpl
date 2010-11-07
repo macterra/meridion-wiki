@@ -1,0 +1,14 @@
+<?php // -*-html-*- ?>
+<!-- $Id: nochanges.tmpl,v 1.3 2002/02/04 20:38:01 carstenklapp Exp $ -->
+<?php
+    if ($request->getArg('lockchanged'))
+        $LockChangedMsg = ($page->get('locked'))
+                           ? _("Page now locked.")
+                           : _("Page now unlocked.");
+    else
+        $LockChangedMsg = "";
+?>
+<p><strong><?=_("Edit aborted.")?></strong>
+<?=_("You have not made any changes so no new version has been saved.")?></p>
+<?=$LockChangedMsg?>
+<?= Template('browse') ?>

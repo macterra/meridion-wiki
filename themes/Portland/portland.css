@@ -1,0 +1,24 @@
+/**
+ * $Id: portland.css,v 1.9 2002/02/08 22:56:37 carstenklapp Exp $
+ *
+ * PhpWiki's Portland style sheet based on the original Wiki
+ *
+ * Styles are kept to a minimum, so the page will mostly appear
+ * according to the browser's default font settings.
+ */
+body {
+  color : black;
+  background : white;
+}
+
+img {
+  border : 0 none;
+}
+
+.wiki-edithelp {
+  font-size : smaller;
+}
+
+input.numeric {
+  text-align: right;
+}

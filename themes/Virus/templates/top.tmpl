@@ -1,0 +1,99 @@
+<?php  // -*-html-*-
+/* $Id: top.tmpl,v 1.12 2002/02/21 21:18:30 carstenklapp Exp $
+ *
+ * This template is responsible mainly for the outer level <html> stuff and the and <head>.
+ */
+printf("<?xml version=\"1.0\" encoding=\"%s\"?>\n", CHARSET);
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<!-- $Id: top.tmpl,v 1.12 2002/02/21 21:18:30 carstenklapp Exp $ -->
+<meta http-equiv="Content-Type" content="text/html; charset=<?=CHARSET?>" />
+<?php $ROBOTS_CONTENT = $ROBOTS_META ? $ROBOTS_META : "noindex,nofollow"; ?>
+<meta name="robots" content="<?= $ROBOTS_CONTENT ?>" />
+<meta name="keywords" content="<?=split_pagename($page->getName())?>, <?=WIKI_NAME?>" />
+<?php if (!empty($PAGE_DESCRIPTION)) { ?>
+<meta name="description" content="<?=$PAGE_DESCRIPTION?>" />
+<?php } ?>
+<meta name="PHPWIKI_VERSION" content="<?=PHPWIKI_VERSION?>" />
+<base href="<?=BASE_URL?>" />
+<?php /**
+       * Additional navigation links are provided here in the html header for browsers
+       * which support them: Mozilla, iCab, Amaya (and certain versions of Opera??).
+       *
+       * See http://www.w3.org/TR/html401/struct/links.html#edef-LINK
+       *     http://www.euronet.nl/~tekelenb/WWW/LINK/index.html
+       */ ?>
+<link rel="shortcut icon" href="<?=$Theme->getImageURL('favicon.ico')?>" />
+<link rel="home" title="<?=HomePage?>" href="<?=WikiURL(HomePage)?>" />
+<link rel="help" title="<?=_("HowToUseWiki")?>" href="<?=WikiURL(_("HowToUseWiki"))?>" />
+<link rel="copyright" title="GNU General Public License" href="http://www.gnu.org/copyleft/gpl.html#SEC1" />
+<?php
+      $wikiadminName = _("The PhpWiki Programming Team");
+      $wikiadminUrl = "http://phpwiki.sourceforge.net/phpwiki/ThePhpWikiProgrammingTeam";
+      ?>
+<link rel="author" title="<?= $wikiadminName ?>" href="<?= $wikiadminUrl ?>" />
+<link rel="search" title="<?=_("FindPage")?>" href="<?=WikiURL(_("FindPage"))?>" />
+<?php /**
+       * Provide alternate variations of the page content:
+       * 'viewsource' and 'browse'.
+       * RSS or translated pages could go here too.
+       */
+      if (!empty($revision)) {
+          $args = $request->getargs();
+          $action = $args['action'];
+          if (!($action == "viewsource")) {
+            $alternatelinkTitle = fmt("%s: %s",_("View Source"), $page->getName());
+            $alternatelinkUrl = WikiURL($revision, array('action' => 'viewsource'));
+          }
+          if (!($action == "browse")) {
+            $alternatelinkTitle = $page->getName();
+            $alternatelinkUrl = WikiURL($revision, array('action' => 'browse'));
+          } ?>
+<link rel="alternate" title="<?= $alternatelinkTitle ?>" href="<?= $alternatelinkUrl ?>" />
+<?php } ?>
+
+<?php /**
+       * Add some user-specific links.
+       */ ?>
+<?php if (!$user->isSignedIn()) {
+      /* For users not signed in */ ?>
+<link rel="bookmark" title="<?=_("SandBox")?>" href="<?=WikiURL(_("SandBox"))?>" />
+<link rel="bookmark" title="<?=_("WikiWikiWeb")?>" href="<?=WikiURL(_("WikiWikiWeb"))?>" />
+<?php } ?>
+
+<?php if ($user->isadmin()) {
+      /* Only for the Administrator */ ?>
+<link rel="bookmark" title="<?=_("PhpWikiAdministration")?>" href="<?=WikiURL(_("PhpWikiAdministration"))?>" />
+<?php } ?>
+
+<?php if ($user->isSignedIn()) {
+      /* For signed-in users */ ?>
+<link rel="bookmark" title="<?=_("UserPreferences")?>" href="<?=WikiURL(_("UserPreferences"))?>" />
+<?php /* User's calendar page
+       */
+      $UserCalPageTitle = $user->getId() . "."._("Calendar");
+      $UserCalPageUrl = WikiURL($UserCalPageTitle);
+      ?>
+<link rel="bookmark" title="<?= $UserCalPageTitle ?>" href="<?= $UserCalPageUrl ?>" />
+<?php /* Today's calendar page for the user if it exists
+       */
+      $UserCalPageTodayTitle = $UserCalPageTitle .".". strftime("%Y-%m-%d", time()); //FIXME
+      $dbi = $request->getDbh();
+      if ($dbi->isWikiPage($UserCalPageTodayTitle)) {
+          $UserCalPageTodayUrl = WikiURL($UserCalPageTodayTitle);
+          ?>
+<link rel="bookmark" title="<?= $UserCalPageTodayTitle ?>" href="<?= $UserCalPageTodayUrl ?>" />
+<?php } ?>
+<?php } //end of links for signed-in user ?>
+
+<?= $Theme->getCSS() ?>
+<title><?=WIKI_NAME?> - <?=AsString($TITLE)?></title>
+</head>
+<?= Template('body') ?>
+<!-- phpwiki source:
+<?=$RCS_IDS?>
+-->
+</html>

@@ -1,0 +1,37 @@
+<?php  // -*-html-*-
+/* $Id: top-htmldump.tmpl,v 1.1 2002/02/21 21:09:50 carstenklapp Exp $
+ *
+ * This template is used only for html file dumps, and is responsible mainly for the outer level <html> stuff and the and <head>.
+ */
+printf("<?xml version=\"1.0\" encoding=\"%s\"?>\n", CHARSET);
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<!-- $Id: top-htmldump.tmpl,v 1.1 2002/02/21 21:09:50 carstenklapp Exp $ -->
+<meta http-equiv="Content-Type" content="text/html; charset=<?=CHARSET?>" />
+<?php /**
+       * Additional navigation links are provided here in the html header for browsers
+       * which support them: Mozilla, iCab, Amaya (and certain versions of Opera??).
+       *
+       * See http://www.w3.org/TR/html401/struct/links.html#edef-LINK
+       *     http://www.euronet.nl/~tekelenb/WWW/LINK/index.html
+       */ ?>
+<link rel="home" title="<?=HomePage?>" href="<?=WikiURL(HomePage)?>" />
+<link rel="help" title="<?=_("HowToUseWiki")?>" href="<?=WikiURL(_("HowToUseWiki"))?>" />
+<link rel="copyright" title="GNU General Public License" href="http://www.gnu.org/copyleft/gpl.html#SEC1" />
+<?php
+      $wikiadminName = _("The PhpWiki Programming Team");
+      $wikiadminUrl = "http://phpwiki.sourceforge.net/phpwiki/ThePhpWikiProgrammingTeam";
+      ?>
+<link rel="author" title="<?= $wikiadminName ?>" href="<?= $wikiadminUrl ?>" />
+
+<?= $Theme->getCSS() ?>
+<title><?=WIKI_NAME?> - <?=AsString($TITLE)?></title>
+</head>
+<?= Template('body') ?>
+<!-- phpwiki source:
+<?=$RCS_IDS?>
+-->
+</html>

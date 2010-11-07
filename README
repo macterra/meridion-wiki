@@ -1,0 +1,126 @@
+FIXME: This is outdated.
+
+PhpWiki is a web application licensed under the Gnu Public License, which
+should be included in the same directory as this README. A copy
+can be found at http://www.gnu.org/copyleft/gpl.txt.
+
+See INSTALL for installation notes.
+Read UPGRADE before upgrading from a previous version of PhpWiki.
+
+doc/:
+INSTALL.mysql          for using PhpWiki with MySQL
+INSTALL.pgsql          for using PhpWiki with PostgreSQL
+INSTALL.flatfile       for using PhpWiki with flatfile databases
+INSTALL.mSQL           for using PhpWiki with mSQL
+INSTALL.MacOSX         for using PhpWiki in MacOSX
+README.coding          for notes on modifying PhpWiki
+DBLIB.txt
+CREDITS
+HISTORY
+
+For a list of current bugs see:
+https://sourceforge.net/bugs/?group_id=6121
+
+The out-of-the-box version uses a dbm file in the /tmp directory; you may
+wish a more permanent place for yours, but make sure it's read/writable
+by your web server!
+
+NOTE: Not all database versions are equal. The MySQL and Postgresql
+implementations have the full set of features; DBM and mSQL are
+missing only a few, and the flat file implementation is solid
+and waiting for your improvement. All are suitable for production.
+
+MANIFEST:
+
+* FIXME: files moved or replaced
+
+index.php:             just the user-defined configs, calls lib/main.php
+
+lib/:
+lib/ArchiveCleaner.php
+lib/config.php:        not user-definable config functions.
+lib/DbaDatabase.php
+*lib/dbalib.php:       database access functions for the dba interface
+lib/DbaListSet.php
+lib/DbaPartition.php
+*lib/db_filesystem.php support for flat file Wiki
+*lib/dbmlib.php:       database access functions for dbm files
+lib/diff.php:          request colored diff's
+lib/diff3.php
+lib/difflib.php
+lib/display.php:       display a page (this calls "lib/transform.php")
+lib/editpage.php:      edit a page, save a page to db, thank user
+lib/ErrorManager.php
+lib/FileFinder.php
+*lib/fullsearch.php:   full page text search
+lib/interwiki.map:     list of other wiki's linked by trailing :
+lib/interwiki.php:     do the interwiki linking
+lib/loadsave.php:      make snapshots or backups
+                       (previously setupwiki.php and dump-/loadserial.php)
+lib/main.php:          the main loop which was previously in index.php
+*lib/mysql.php:        database access functions for mySQL
+*lib/pageinfo.php:     gives detailed low-level info on the page structure
+*lib/pgsql.php:        database access functions for PostgreSQL
+lib/prepend.php:       things which must be done before all else
+lib/removepage.php
+lib/Request.php
+lib/RssWriter.php
+*lib/search.php:       page title search
+lib/stdlib.php:        standard library of functions (non-db related)
+lib/Template.php
+lib/TextSearchQuery.php
+lib/transform.php:     convert wiki markup into HTML
+*lib/userauth.php:     the WikiUser class holding saved state in cookies.
+lib/WikiCallback.php
+lib/WikiDB.php
+lib/WikiPlugin.php
+lib/WikiUser.php
+lib/ziplib.php:        support for zip/unzip, used for page dumps
+ 
+lib/plugin/:
+plugin/_BackendInfo.php
+plugin/BackLinks.php
+plugin/Calendar.php
+plugin/FullTextSearch.php
+plugin/HelloWorld.php
+plugin/IncludePage.php
+plugin/LikePages.php
+plugin/MostPopular.php
+plugin/PageHistory.php
+plugin/RandomPages.php
+plugin/RecentChanges.php
+plugin/text2png.php
+plugin/TitleSearch.php
+plugin/Toolbar.php
+plugin/UserPage.php
+plugin/ViewSource.php
+
+lib/WikiDB/:
+
+
+*admin/: directory completely replaced by other files
+
+*admin/dumpserial.php:        replaced by lib/loadsave.php
+*admin/loadserial.php:        replaced by lib/loadsave.php
+*admin/lockpage.php:          lock a page so it cannot be edited
+*admin/shrinkdbm.pl:          Perl script to reduce size of DBM files
+*admin/wiki_dumpHTML.php:     dump the Wiki out as HTML pages
+*admin/wiki_port1_0.php:      import a 1.0 PhpWiki database
+*admin/wiki_rebuilddbms.php:  rebuild DBM files to reclaim disk space
+
+templates/:
+browse.html:           for rendering most pages
+editpage.html:         template for form for editing pages
+message.html:          error/system message template
+
+schemas/:              SQL schemas for the RDBMSs
+
+tests/:
+
+themes/:
+
+Steve Wainstead
+swain@panix.com
+http://wcsb.org/~swain/
+
+$Id: README,v 1.16 2002/02/04 21:59:53 carstenklapp Exp $

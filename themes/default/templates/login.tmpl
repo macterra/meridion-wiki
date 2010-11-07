@@ -1,0 +1,54 @@
+<?php // -*-html-*- ?>
+<!-- $Id: login.tmpl,v 1.14 2002/02/14 19:08:14 carstenklapp Exp $ -->
+<!-- The login form -->
+
+<?php if ($fail_message) { ?>
+  <p><strong><?=$fail_message?></strong></p>
+  <hr noshade="noshade" />
+<?php } ?>
+
+<?php 
+if (ALLOW_BOGO_LOGIN && $require_level <= WIKIAUTH_BOGO) {
+  echo '<p>', _("You may sign in using any WikiWord as a UserId. (ÀÖØöøÿßö etc. may be used too). The UserId will be used as a link in RecentChanges to your UserId page, your HomePage. You do not need to enter a password."), '</p>';
+} 
+?>
+
+<form method="post" action="<?=BASE_URL?>" accept-charset="<?=CHARSET?>" name="login">
+
+<table cellspacing="4">
+<tr>
+  <td align="right"><?= _("UserId") ?>:</td>
+  <td><input type="text" name="auth[userid]" size="12" maxlength="256" value="<?=$userid?>" /></td>
+</tr>
+<tr>
+  <td align="right"><?= _("Password") ?>:</td>
+  <td><input type="password" name="auth[password]" size="12" maxlength="256" /></td>
+</tr>
+<tr><td align="center" colspan="2">
+  <?=Button("submit:", _("Sign In"), 'wikiaction')?>
+  <?php if (!$require_level) { ?>
+    <?=Button("submit:auth[cancel]", _("Cancel"), 'button')?>
+  <?php } ?>
+</td></tr>
+</table>
+
+<input type="hidden" name="auth[require_level]" value="<?=$require_level?>" />
+<input type="hidden" name="auth[login]" value="1" />
+<?= HiddenInputs($request->getArgs()) ?>
+</form>
+
+<script language="JavaScript" type="text/javascript">
+<!-- // Really there's got to be a simpler way to do this....
+function select_input (type) {
+    var elements = document.forms['login'].elements;
+    for (var i = 0; i < elements.length; i++) {
+        if (elements[i].type == type) {
+            elements[i].focus();
+            return;
+        }
+    }
+}
+select_input('<?= $userid ? "password" : "text" ?>');
+//-->
+</script>
+

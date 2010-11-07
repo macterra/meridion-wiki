@@ -1,0 +1,8 @@
+This release uses a complete new database API.
+
+For now, see lib/WikiDB.php for a description of the external API to the database.
+
+See lib/WikiDB/backend.php for more detail on how to write a new backend.
+
+$Id: DBLIB.txt,v 1.1 2001/12/01 22:01:48 wainstead Exp $
+

@@ -1,0 +1,30 @@
+<?php // -*-html-*- ?>
+<!-- $Id: browse.tmpl,v 1.22 2002/02/19 23:00:26 carstenklapp Exp $ -->
+
+<?php if (! $revision->isCurrent()) { ?>
+  <p><strong><?=_("Note:")?></strong>
+     <?=_("You are viewing an old revision of this page.")?>
+  <?= Button('browse', _("View the current version"), $page)?>.
+  </p>
+<?php } ?>
+
+<?php
+  global $authWikiName, $authLevel;
+
+  //print "name=$authWikiName level=$authLevel<p>\n";
+?>
+
+<?=$CONTENT?>
+
+<div id="actionbar" class="toolbar">
+<hr class="printer" noshade="noshade" />
+<p class="editdate"><?= $Theme->getLastModifiedMessage($revision) ?></p>
+<?php
+global $HIDE_TOOLBARS;
+if (!$HIDE_TOOLBARS) {
+?>
+<hr class="toolbar" noshade="noshade" />
+<?= Template('actionbar') ?>
+<?php } ?>
+<!-- RELATEDPAGES were here. -->
+</div>

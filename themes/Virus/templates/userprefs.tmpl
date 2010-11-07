@@ -1,0 +1,55 @@
+<?php // -*-html-*- ?>
+<!-- $Id: userprefs.tmpl,v 1.21 2002/02/14 03:45:05 carstenklapp Exp $ -->
+<?php
+
+$time = time();
+$offset = $request->getPref('timeOffset') * 3600;
+$serverTime = $time - $offset;
+
+$timeOffsetInput = HTML::input(array('type' => "text",
+                                     'size' => 6,
+                                     'maxlength' => 6,
+                                     'name' => "pref[timeOffset]",
+                                     'class' => "numeric",
+                                     'value' => $request->getPref('timeOffset')));
+
+$RelativeDatesCB = HTML(HTML::input(array('type' => 'hidden',
+                                          'name' => 'pref[relativeDates][]',
+                                          'value' => '0')),
+                        HTML::input(array('type' => 'checkbox',
+                                          'name' => 'pref[relativeDates][]',
+                                          'value' => '1',
+                                          'checked' => (bool) $request->getPref('relativeDates'))));
+?>
+<form action="<?=WikiURL($page)?>" method="post">
+  <input type="hidden" name="pagename" value="<?=$request->getArg('pagename')?>" />
+  <h2><?=_("Edit Area Size")?></h2>
+  <p><?=_("Height")?>
+     <input type="text" name="pref[editHeight]" size="4" maxlength="4" class="numeric"
+            value="<?=$request->getPref('editHeight')?>" />
+     <?=_("Width")?>
+     <input type="text" name="pref[editWidth]" size="4" maxlength="4" class="numeric"
+            value="<?=$request->getPref('editWidth')?>" />
+  </p>
+  <p><?=_("Note that many browsers will automatically adjust the width of the editing area so that it fills the browser window.  In this case, the width preference will be ignored.")?></p>
+
+  <h2><?=_("Time Zone")?></h2>
+  <p>
+    <?=fmt("Add %s hours to the server's local time when reporting times.",
+           $timeOffsetInput)?>
+  </p>
+  <p>
+    <?=fmt("The current time at the server is %s.",
+            HTML::strong($Theme->formatDateTime($serverTime)))?>
+    <?=fmt("With the current offset, this would be reported as %s.",
+           HTML::strong($Theme->formatDateTime($time)))?>
+  </p>
+
+  <h2><?=_("Date Format")?></h2>
+  <p><?=$RelativeDatesCB?>
+     <?=_("Show relative dates using 'Today' and 'Yesterday'.")?>
+  </p>
+
+  <hr />
+  <p><?=Button("submit:", _("Update Preferences"), 'wikiaction')?></p>
+</form>

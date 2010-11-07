@@ -1,0 +1,82 @@
+Date: Sun, 27 Jan 2002 17:28:55 -0500
+Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
+X-Rcs-Id: $Id: PhpWikiSystemverwalten,v 1.12 2002/01/27 23:08:57 carstenklapp Exp $
+Content-Type: application/x-phpwiki;
+  pagename=PhpWikiSystemverwalten;
+  flags=PAGE_LOCKED;
+  charset=iso-8859-1
+Content-Transfer-Encoding: binary
+
+__Beachte__: Du mußt den Systemverwalter-Zugang zuerst mit einem Passwort schützen, sonst werden die meisten Links auf dieser Seite nicht funktionieren.
+
+-----------
+! Anmelden
+
+__[ Anmeldung | phpwiki:?action=login]__
+
+Mit diesem Button mußt du dich als Administrator anmelden. Nur angemeldet kann man Seiten ''sperren'', ''entsperren'', ''löschen'' oder ''gesperrte'' Seiten editieren.
+
+----------
+!! Aufräumen
+
+Räume die Wiki SandKiste auf. Hiermit kann man die Seite mit der Version von locale/de/pgsrc/SandKiste erneut initialisieren: [ Putze die SandKiste aus | phpwiki:?action=loadfile&source=locale/de/pgsrc/SandKiste ].
+
+----------
+!! Speicherauszug und Archiv-Datensicherung
+
+! ZIP Dateien als Backup der PhpWiki Datenbank
+
+Diese Links erzeugen automatisch ZIP Archive, mit allen Seiten in deinem Wiki. Die ZIP Datei wird auf deinen lokalen Computer heruntergeladen, und muß dort gespeichert werden.
+
+Diese __[ kleine ZIP Datei | phpwiki:?action=zip]__ enthält nur die aktuellste Versionen aller Seiten, und diese __[ große ZIP Datei | phpwiki:?action=zip&include=all]__ enthält zusätzlich alle archivierten, vorigen Versionen.
+
+(Wenn dein PhpWiki insoweit konfiguriert ist, darf jeder die ZIP Datei herunterladen.)
+
+Wenn in deinem PHP die ''zlib'' Bibliothek unterstützt, werden alle Seiten in dem Archiv komprimiert, ansonsten nur unkomprimiert gespeichert.
+
+! Wiki Seiten als Dateien in lokales Verzeichnis speichern
+
+Hier kannst du alle Seiten aus deinem Wiki in eine lokales Verzeichnis deiner Wahl herunterladen.
+
+[ Schreibe Seiten | phpwiki:?action=dumpserial&directory=(/tmp/wikidump) ]
+
+Nur die neuesten Versionen aller Seiten wird als Einzeldatei in dieses Verzeichnis geschrieben. Beachte, daß evtl. deine Benutzerrechte dazu ausreichen müssen.
+
+-----------
+
+!! Wiederherstellen
+
+Wenn du ein PhpWiki Backup besitzt, kannst du dieses hier wieder restaurieren. Beachte das alle Seiten in der Datenbank damit überschrieben werden! Das heißt, das Hochladen einer lokalen StartSeite überschreibt die aktuelle Seite in der Datenbank. Um nur einzelne Dateien zu restaurieren, musst dein Verzeichnis oder ZIP Archiv insosoweit anpassen.
+
+! Datei Hochladen
+
+Hier kannst du ein ZIP Archiv hochladen, oder einzelne Dateien von deinem Computer (client).
+
+[ Hochladen | phpwiki:?action=upload&file=50()upload ]
+
+! Dateien Laden
+
+Hier kann man ZIP Archive, einzelne Dateien oder ganze Verzeichnisse ins Wiki laden. Die Dateien oder Verzeichnisse müssen lokal auf dem HTTP Server bestehen. Du kannst den Pfad allerdings auch mit der http: oder einer ftp: URL von externen Quellen laden.
+
+[ Seiten Laden | phpwiki:?action=loadfile&source=50(/tmp/wikidump) ]
+
+-----------
+
+!! Daten-Format
+
+Momentan werden alle Seiten dateiweise als MIME ([ RFC2045 | http://www.faqs.org/rfcs/rfc2045.html ]) E-Mail's ([ RFC822 | http://www.faqs.org/rfcs/rfc822.html ]) gespeichert. Der Content-type ''application/x-phpwiki'' wird benutzt, und die Seiten Meta Daten sind als Content-type Parameter codiert. (Wenn die Datei mehrere Versionen der Seite enthält, wird der MIME Typ ''multipart/mixed'' verwendet, und jede Version als Teil ''application/x-phpwiki'' codiert). Der Email Body enthält die aktuelle Version des Seiteninhaltes, der Kopf die anderen Daten aus der Datenbank. (Datum, Autor, ...)
+
+! Alte Daten-Formate
+
+__Serialisierte Dateien__
+
+Der alte Dump-To-Directory Befehl schrieb alle Seiten als PHP ''serialized()'' Zeichenketten hinaus, die erstens unleserlich sind, und zweitens schwer bis gar nicht zu editieren sind.
+
+__Textdateien__
+
+Davor wurde der Seiteninhalt als einfache Textdatei gespeichert, d.h. alle zusätzlichen Daten (Meta-Daten) gingen verloren. (Datum, Autor, Version, ...). Der Seitenname entsprach dem Dateinamen.
+
+Die Hochlade- und Lade-Funktionen erkennen jeden dieser drei Dateitypen automatisch. Es werden noch alle unterstützt.
+(ZIP, Verzeichnis oder Einzeldateien als MIME E-Mail, Serialisiert oder einfache Textdatei.)
+----
+PhpWikiDokumentation

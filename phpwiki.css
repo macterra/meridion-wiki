@@ -1,0 +1,412 @@
+/**
+ * $Id: phpwiki.css,v 1.62 2002/02/19 22:17:40 carstenklapp Exp $
+ *
+ * This incarnation of this stylesheet is a complete rewrite from the
+ * ground up.
+ *
+ * Mozilla's "DOM Inspector" Sidebar was an invaluable troubleshooting
+ * tool for mapping the more complex CSS node selectors, such as those
+ * used to reference the various CalendarPlugin elements.
+ */
+
+/**
+ * NS4 doesn't grok @import. This allows us to put things which
+ * break NS4 in another file.
+ */
+@import url(phpwiki-heavy.css);
+
+
+/**
+ * General
+ */ 
+img { border: 0; }
+
+form { margin: 0; }
+table {
+  border-spacing: 1px;
+  /* For Mozilla */
+  empty-cells: show;
+}
+caption {
+  caption-side: top;
+  text-align: left;
+  margin-bottom: .5ex;
+  /* Allow the caption to extend to the full page width
+     Mac ie5.1 ignores this*/
+  width: 100%;
+}
+
+
+/**
+ * Wiki
+ */
+body {
+  /* ivory #ffe #fffff0*/
+  background: #fffff0;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 1.5ex 1em;
+}
+
+div.wikitext hr { height: 1px; }
+
+div.wikitext pre { font-family: monospace; }
+
+
+/**
+ * PageTypes
+ */
+/* Main wiki text box */
+div.wikitext {
+  margin-top:    1ex;
+  margin-bottom: 0.5ex;
+  background: white;
+  /* Netscape 4 requires this 1px border.
+     Without it, the paper borders below cause
+     the white background to disappear. */
+  border: 1px black solid;
+  /* "paper" borders */
+  border-top:  1px #e8e6df solid;
+  border-left: 1px #e8e6df solid;
+  border-bottom: 1px #d2d2d2 solid;
+  border-right:  1px #b2b2b2 solid;
+  padding-left:  0.8em; 
+  padding-right: 0.8em;
+  padding-top:    0.5ex;
+  padding-bottom: 0.5ex;
+  /*This breaks Netscape 4: (display does not go full width).
+   * width: auto;
+   */
+  clear: both;
+}
+.interwiki-map thead td { text-decoration: underline; }
+
+
+/**
+ * Wiki Forms
+ * 
+ * The div inside the wikiadmin upload form does not
+ * have a class yet, so it must be referenced indirectly
+ */
+div.wikiaction { background-color: #eee; }
+/* div.wikiadmin { background-color: #fee; } */
+form.wikiadmin div { background-color: #fee; }
+
+
+/**
+ * Link styles
+ */
+.wiki, .named-wiki {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Action buttons */
+a.wikiaction, a.wikiadmin, a.wiki-rc-action, a.wikiunsafe {
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a.wikiaction, input.wikiaction, input.button { background-color: #ddd; }
+
+.wikiunsafe { background-color: #fcc; }
+
+a.wikiadmin, input.wikiadmin  { background-color: #fdd; }
+
+/* Unknown links */
+.wikiunknown, .named-wikiunknown {
+  font-weight: normal;
+  font-size: 100%;
+}
+ /* QuestionMark #600 */
+.wikiunknown a, .named-wikiunknown a {
+  color: #447;
+  background-color: #eee;
+  text-decoration: none;
+  font-weight: normal;
+  font-size: smaller;
+}
+
+/* Backlinks */
+.backlinks {
+  text-decoration: underline;
+  color: #006;
+}
+h1 .backlinks { text-decoration: underline; }
+
+/* Interwiki links */
+.wikipage  { font-weight: bold; }
+.interwiki { text-decoration: none; }
+.interwiki, i.interwiki .wikipage, em .interwiki .wikipage { font-style: oblique; }
+.interwiki .wikipage, i .interwiki, em .interwiki { font-style: normal; }
+
+
+/**
+ * headings
+ */
+h1, h2, h3, h4, h5, h6 { font-family: Arial, Helvetica, sans-serif; }
+
+h1 { margin: 0; }
+
+
+/**
+ * Tables
+ */
+table, td { font-family: Arial, Helvetica, sans-serif; }
+caption { font-family: Arial, Helvetica, sans-serif; }
+.pagelist {
+}
+.pagelist thead, .pagelist thead u {  }
+.pagelist tr.evenrow { background: #eee; }
+.pagelist tr.oddrow  { background: white; }
+
+
+/**
+ * Toolbar
+ */
+.toolbar, input.button, #signin { font-family: Arial, Helvetica, sans-serif; }
+
+.toolbar {
+  padding: 0;
+  margin:  0;
+}
+#navbuttons {
+  padding-right: 4em; /* wrap around logo */
+  padding-bottom: 1ex; /* space for h1 */
+}
+.editdate {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  padding-top: 0.25ex;
+}
+
+
+/**
+ * Edit Page & View Source
+ */
+
+/* Make the textarea the full page width */
+textarea.wikiedit {
+  width: 100%;
+  margin-bottom: 0.5ex;
+  margin-top:    0.5ex;
+  padding: 2px;
+}
+
+#editarea-size {
+  margin-top: 1ex;
+  text-align: right;
+  font-size: smaller;
+}
+
+/* IncludePage plugin */
+.transclusion-title {
+  text-align: right;
+  font-style: oblique;
+  font-size:  smaller;
+  text-decoration: underline;
+  margin-bottom: 0.25ex;
+  margin-right:  0.25em;
+} 
+.transclusion, .wiki-edithelp {
+  font-size: smaller;
+}
+.transclusion {
+  border: 1px solid gray;
+  padding-left:  0.8em; 
+  padding-right: 0.8em; 
+  padding-top:     0px;
+  padding-bottom:  0px;
+  margin-left:   0.25em;
+  margin-right:  0.25em;
+  margin-bottom: 0.1ex;
+}
+.wiki-edithelp {
+  background: white;
+  border: medium solid #fff8dc; /* darker ivory */
+  padding-left:  0.5em;
+  padding-right: 0.5em;
+  padding-top:    0.75ex;
+  padding-bottom: 0.75ex;
+  margin-left:  0;
+  margin-right: 0;
+  margin-top: 1ex;
+  margin-bottom: 1ex;
+}
+.wiki-edithelp .wiki {
+  /* color: #5454ff;*/
+}
+.wiki-edithelp p {
+  font-family: Arial, Helvetica, sans-serif;
+  padding-left:  0.5em;
+  padding-right: 0.5em;
+  padding-top:    0.5ex;
+  padding-bottom: 0.5ex;
+  margin: 0;
+}
+
+
+/**
+ * Calendar plugin
+ */
+table.cal {
+  border: 1px outset gray;
+  background: white;
+  margin: 0.5ex 0.5em;
+  padding: 1px;
+  /* For Mozilla */
+  empty-cells: hide;
+} 
+
+/* cells */
+table.cal td {
+  background: white;
+  text-align: right;
+} 
+
+/* Month-name header */
+table.cal-header { font-size: larger; }
+table.cal-header tr, table.cal-header td { text-align: center; }
+.cal-arrow {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Day-names header */
+table.cal tbody tr .cal-dayname {  }
+.cal-dayname td {
+  text-align: center;
+  font-size: smaller;
+  text-decoration: underline;
+}
+
+/* Individual days */
+a.cal-hide { text-decoration: none; }
+
+/* Today */
+ /* cell */
+table.cal td.cal-today {
+  margin: 1px;
+  border: 1px solid gray;
+}
+ /* text */
+table.cal td.cal-today a.cal-hide {  }
+
+/**
+ * Diff Output
+ */
+/* main box */
+.diff {
+  background: white;
+  /* for NS4 */
+  border: 1px solid black;
+}
+.diff .block {
+  background: #ccc;
+  padding-left: 1em;
+  /* for NS4 */
+  /*border: none;*/
+}
+
+/* individual blocks */
+.diff .context {
+  background: white;
+  /* for NS4 */
+  border: none;
+}
+/* + - line prefix */
+.diff .block tt {
+  font-weight: normal;
+  font-family: monospace;
+  color: black;
+  /* for NS4 */
+  margin-left: 0;
+  border: none;
+}
+/* changed words */
+.diff del, .diff ins {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* blocks containing deleted or added words */
+.diff .original, .diff .deleted,
+.diff .final, .diff .added {
+  background: white;
+}
+/* blocks containing deleted words */
+.diff .original, .diff .deleted {
+  background: #fcc;
+  /* for NS4 */
+  border: none;
+}
+/* blocks containing added words */
+.diff .final, .diff .added {
+  background: #cfc;
+  /* for NS4 */
+  border: none;
+}
+
+/* These don't work in NS4 -- it completely ignores <del> and <ins>. */
+/* deleted words */
+.diff del { background: #f99; }
+/* added words */
+.diff ins { background: #9f9; }
+
+
+/**
+ * PageHistory, Info
+ */
+td.pageinfo { font-weight: bold; }
+.pageinfo-minoredit, .pageinfo-authorid {
+  font-size: smaller;
+  font-style: oblique;
+}
+
+
+/**
+ * Other
+ */
+.printer { display: none; }
+
+/* PHP Warnings */
+div.errors {
+  color: black;
+  background: #eee;
+  margin-top:    1em;
+  margin-bottom: 1em;
+  padding-left:  0.8em; 
+  padding-right: 0.8em; 
+  padding-top:    0.8ex;
+  padding-bottom: 0;
+  border: medium solid red;
+  clear: both;
+}
+.errors h4 {
+  color: red;
+  margin:  0;
+  padding: 0;
+  text-decoration: underline;
+}
+.error { font-family: monospace; }
+.error ul { font-family: monospace; }
+
+/* Debug */
+.debug {
+  color: black;
+  background: white;
+  font-family: monospace;
+  font-size: smaller;
+  margin: 1ex 0;
+  padding: 0.5ex 0.5em;
+  border: medium solid #fff8dc; /* darker ivory */
+}
+
+
+/* For emacs users
+ *
+ * Local Variables:
+ * mode: c
+ * c-file-style: cc-mode
+ * End:
+ */

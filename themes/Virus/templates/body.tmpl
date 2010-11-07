@@ -1,0 +1,35 @@
+<?php // -*-html-*- ?>
+<!-- $Id: body.tmpl,v 1.26 2002/02/22 19:23:43 carstenklapp Exp $ -->
+<body>
+<div id="navbar" class="toolbar">
+<!-- The logo -->
+<div id="logo"><a class="wikilink" 
+                  href="<?=WikiURL(HomePage)?>"
+                  ><img src="<?=$Theme->getImageURL('logo')?>"
+                        border="0" alt="<?=WIKI_NAME?>: <?=HomePage?>" 
+                        align="right" /></a></div>
+<?php
+global $HIDE_TOOLBARS;
+if (!$HIDE_TOOLBARS) {
+?>
+<!-- The top navigation/search bar -->
+<?= Template('navbar') ?>
+<?php } ?>
+
+<!-- Page title -->
+<h1><?=$HEADER?></h1>
+</div>
+<?= $CONTENT ?>
+<div id="logo">
+<a href="http://www.churchofvirus.org/bbs/wikithread.php?<?= $PAGENAME ?>" target="_blank">
+<img src="http://www.churchofvirus.org/wikidata/themes/Virus/images/logo.png"
+                        border="0" alt="discuss page on the BBS" 
+                        align="left" />
+discuss this page on the BBS
+</a>
+</div> 
+
+<?= $GLOBALS['ErrorManager']->getPostponedErrorsAsHTML() ?>
+
+<?php if (defined('DEBUG')) { ?><?= Template('debug') ?><?php } ?>
+</body>
